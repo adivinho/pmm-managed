@@ -208,7 +208,7 @@ func (s *Service) sendOneEvent(ctx context.Context) error {
 	})
 
 	wg.Go(func() error {
-		req, err := s.makeV2Payload(settings.Telemetry.UUID)
+		req, err := s.makeV2Payload(settings.Telemetry.UUID, settings.SaaS.STTEnabled, settings.IntegratedAlerting.Enabled)
 		if err != nil {
 			return err
 		}
@@ -256,7 +256,7 @@ func (s *Service) sendV1Request(ctx context.Context, data []byte) error {
 	return nil
 }
 
-func (s *Service) makeV2Payload(serverUUID string) (*reporter.ReportRequest, error) {
+func (s *Service) makeV2Payload(serverUUID string, sttEnabled, iaEnabled bool) (*reporter.ReportRequest, error) {
 	serverID, err := hex.DecodeString(serverUUID)
 	if err != nil {
 		return nil, errors.Wrapf(err, "failed to decode UUID %q", serverUUID)
@@ -267,6 +267,8 @@ func (s *Service) makeV2Payload(serverUUID string) (*reporter.ReportRequest, err
 		Version:            s.pmmVersion,
 		UpDuration:         ptypes.DurationProto(time.Since(s.start)),
 		DistributionMethod: s.tDistributionMethod,
+		SttEnabled:         sttEnabled,
+		IaEnabled:          iaEnabled,
 	}
 	if err = event.Validate(); err != nil {
 		// log and ignore
