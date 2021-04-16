@@ -1,4 +1,4 @@
-module github.com/Percona-Lab/pmm-api-tests
+module github.com/adivinho/pmm-managed/tests
 
 go 1.16
 

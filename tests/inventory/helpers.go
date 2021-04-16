@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	pmmapitests "github.com/Percona-Lab/pmm-api-tests"
+	pmmapitests "github.com/adivinho/pmm-managed/tests"
 )
 
 func addRemoteRDSNode(t pmmapitests.TestingT, nodeName string) *nodes.AddRemoteRDSNodeOKBody {

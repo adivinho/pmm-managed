@@ -15,7 +15,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc/codes"
 
-	pmmapitests "github.com/Percona-Lab/pmm-api-tests"
+	pmmapitests "github.com/adivinho/pmm-managed/tests"
 )
 
 func TestAddMySQL(t *testing.T) {
